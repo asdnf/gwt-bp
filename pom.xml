@@ -41,7 +41,6 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -55,10 +54,10 @@
             </exclusions>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -106,7 +105,7 @@
                         <arg>-XcompilerMetrics</arg>
                     </compilerArgs>
                     <!-- DevMode configuration -->
-<!--                    <warDir>${project.build.directory}/${project.build.finalName}</warDir>-->
+                    <!--                    <warDir>${project.build.directory}/${project.build.finalName}</warDir>-->
 
                     <classpathScope>compile+runtime</classpathScope>
                     <!-- URL(s) that should be opened by DevMode (gwt:devmode). -->

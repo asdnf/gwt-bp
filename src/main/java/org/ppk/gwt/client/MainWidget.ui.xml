@@ -1,0 +1,29 @@
+<ui:UiBinder
+        xmlns:ui='urn:ui:com.google.gwt.uibinder'
+        xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+    <g:DockLayoutPanel unit="EM" g:width="300px" g:height="200px">
+        <g:north size="2">
+            <g:Label>Value</g:Label>
+        </g:north>
+        <g:north size="2">
+            <g:Label ui:field="result"/>
+        </g:north>
+        <g:south size="2">
+            <g:HTMLPanel>
+                <table>
+                    <tr>
+                        <td>
+                            <g:PushButton ui:field="closeBtn">Close</g:PushButton>
+                        </td>
+                        <td>
+                            <g:PushButton>OK</g:PushButton>
+                        </td>
+                    </tr>
+                </table>
+            </g:HTMLPanel>
+        </g:south>
+    </g:DockLayoutPanel>
+    <ui:style>
+
+    </ui:style>
+</ui:UiBinder>

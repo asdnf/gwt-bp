@@ -1,12 +1,11 @@
 package org.ppk.gwt.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.*;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class Entrance implements EntryPoint {
@@ -24,11 +23,14 @@ public class Entrance implements EntryPoint {
                     String json = response.getText();
                     Pojo pojo = JsonUtils.safeEval(json);
                     DialogBox dlg = new DialogBox();
-                    dlg.setTitle("response");
-                    Label lbl = new Label(pojo.getData());
-                    lbl.setWidth("300px");
-                    lbl.setHeight("300px");
-                    dlg.add(lbl);
+                    dlg.setText("Response");
+                    MainWidget widget = new MainWidget();
+                    widget.getResult().setText(pojo.getData());
+                    widget.getCloseBtn().addClickHandler(event -> {
+                        dlg.hide();
+                    });
+                    dlg.add(widget);
+                    dlg.center();
                     dlg.show();
                 }
 
