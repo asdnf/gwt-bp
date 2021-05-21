@@ -2,7 +2,10 @@ package org.ppk.gwt.client;
 
 import com.google.gwt.cell.client.NumberCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.cellview.client.*;
@@ -10,8 +13,6 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
@@ -20,13 +21,18 @@ public class MainWidget extends com.google.gwt.user.client.ui.Composite {
     private static final MyUiBinder uiBinder = GWT.create(MyUiBinder.class);
 
     @UiField
-    Label result;
-
-    @UiField
-    PushButton closeBtn;
-
-    @UiField
     CellTable<DataObject> table;
+
+    @UiField
+    DialogBox dialog;
+
+    public CellTable<DataObject> getTable() {
+        return table;
+    }
+
+    public DialogBox getDialog() {
+        return dialog;
+    }
 
     public MainWidget() {
         initWidget(uiBinder.createAndBindUi(this));
@@ -62,20 +68,23 @@ public class MainWidget extends com.google.gwt.user.client.ui.Composite {
             }
         });
 
-        RequestBuilder rb = new RequestBuilder(RequestBuilder.PUT, "/main/dataobjects");
+        RequestBuilder rb = new RequestBuilder(RequestBuilder.PUT, "/main/dataobject");
         rb.setRequestData("Hello!");
 
-        table.setRowCount(CONTACTS.size(), true);
-        table.setRowData(0, CONTACTS);
+        rb.setCallback(new RequestCallback() {
+            @Override
+            public void onResponseReceived(Request request, Response response) {
+                GWT.log(response.getText());
 
-    }
+//                table.setRowCount(CONTACTS.size(), true);
+//                table.setRowData(0, CONTACTS);
+            }
 
-    public Label getResult() {
-        return result;
-    }
+            @Override
+            public void onError(Request request, Throwable throwable) {
 
-    public PushButton getCloseBtn() {
-        return closeBtn;
+            }
+        });
     }
 
     interface MyUiBinder extends UiBinder<DialogBox, MainWidget> {

@@ -13,38 +13,11 @@ public class Entrance implements EntryPoint {
     public void onModuleLoad() {
         Button sendButton = new Button("Send");
         RootPanel.get("sendButtonContainer").add(sendButton);
-        sendButton.addClickHandler(clickEvent -> {
-            RequestBuilder rb = new RequestBuilder(RequestBuilder.PUT, "/main/test");
-            rb.setRequestData("Hello!");
 
-            rb.setCallback(new RequestCallback() {
-                @Override
-                public void onResponseReceived(Request request, Response response) {
-                    String json = response.getText();
-                    Pojo pojo = JsonUtils.safeEval(json);
-                    DialogBox dlg = new DialogBox();
-                    dlg.setText("Response");
-                    MainWidget widget = new MainWidget();
-                    widget.getResult().setText(pojo.getData());
-                    widget.getCloseBtn().addClickHandler(event -> {
-                        dlg.hide();
-                    });
-                    dlg.add(widget);
-                    dlg.center();
-                    dlg.show();
-                }
+        MainWidget mw = new MainWidget();
+        mw.getDialog().center();
+        mw.getDialog().show();
 
-                @Override
-                public void onError(Request request, Throwable exception) {
-
-                }
-            });
-            try {
-                rb.send();
-            } catch (RequestException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
 }
