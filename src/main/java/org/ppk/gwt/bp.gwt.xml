@@ -24,10 +24,9 @@
 
     <!-- Specify the paths for translatable code                    -->
     <source path='client'/>
-    <source path='shared'/>
+<!--    <source path='shared'/>-->
 
     <!-- allow Super Dev Mode -->
     <add-linker name="xsiframe"/>
 
-<!--    <inherits name="com.vaadin.polymer.Elements"/>-->
 </module>
