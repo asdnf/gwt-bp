@@ -113,7 +113,8 @@
                         <startupUrl>index.html</startupUrl>
                     </startupUrls>
 
-                    <webappDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static</webappDirectory>
+                    <webappDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes/static
+                    </webappDirectory>
                 </configuration>
             </plugin>
 

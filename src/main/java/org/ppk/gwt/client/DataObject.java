@@ -7,6 +7,10 @@ public final class DataObject extends JavaScriptObject {
     protected DataObject() {
     }
 
+    public static native DataObject createInstance() /*-{
+        return {};
+    }-*/;
+
     public native Integer getId() /*-{
         return this.id;
     }-*/;

@@ -8,11 +8,13 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.cellview.client.*;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 
@@ -24,15 +26,10 @@ public class MainWidget extends com.google.gwt.user.client.ui.Composite {
     CellTable<DataObject> table;
 
     @UiField
-    DialogBox dialog;
+    PushButton addBtn;
 
-    public CellTable<DataObject> getTable() {
-        return table;
-    }
-
-    public DialogBox getDialog() {
-        return dialog;
-    }
+    @UiField
+    PushButton deleteBtn;
 
     public MainWidget() {
         initWidget(uiBinder.createAndBindUi(this));
@@ -56,7 +53,7 @@ public class MainWidget extends com.google.gwt.user.client.ui.Composite {
         table.addColumn(idColumn, "Id");
 
 
-        final SingleSelectionModel<DataObject> selectionModel = new SingleSelectionModel<DataObject>();
+        SingleSelectionModel<DataObject> selectionModel = new SingleSelectionModel<DataObject>();
         table.setSelectionModel(selectionModel);
 
         selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
@@ -85,8 +82,15 @@ public class MainWidget extends com.google.gwt.user.client.ui.Composite {
 
             }
         });
+
+
+        addBtn.addClickHandler(clickEvent -> {
+            DataObjectEditor dataObjectEditor = new DataObjectEditor();
+            dataObjectEditor.getDlg().center();
+            dataObjectEditor.getDlg().show();
+        });
     }
 
-    interface MyUiBinder extends UiBinder<DialogBox, MainWidget> {
+    interface MyUiBinder extends UiBinder<DockLayoutPanel, MainWidget> {
     }
 }

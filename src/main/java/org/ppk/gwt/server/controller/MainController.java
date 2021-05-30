@@ -3,6 +3,7 @@ package org.ppk.gwt.server.controller;
 import org.ppk.gwt.server.dao.DataObjectRepository;
 import org.ppk.gwt.server.entity.DataObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,18 +23,33 @@ public class MainController {
 
     @RequestMapping(value = "/main/test", method = RequestMethod.PUT)
     @ResponseBody
-    Map<String, String> test(@RequestBody String data) {
+    ResponseEntity<Map<String, String>> test(@RequestBody String data) {
         Map<String, String> response = new HashMap<>();
         response.put("data", data);
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @RequestMapping(value = "/main/dataobject", method = RequestMethod.GET)
     @ResponseBody
-    List<DataObject> getDataObjects() {
+    ResponseEntity<List<DataObject>> getDataObjects() {
         ArrayList<DataObject> response = new ArrayList<>();
         dataObjectRepository.findAll().forEach(response::add);
-        return response;
+        return ResponseEntity.ok(response);
+    }
+
+    @RequestMapping(value = "/main/dataobject", method = RequestMethod.PUT)
+    @ResponseBody
+    ResponseEntity<Void> putDataObjects(@RequestBody DataObject dataObject) {
+        dataObject.setId(null);
+        dataObjectRepository.save(dataObject);
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value = "/main/dataobject", method = RequestMethod.POST)
+    @ResponseBody
+    ResponseEntity<Void> postDataObjects(@RequestBody DataObject dataObject) {
+        dataObjectRepository.save(dataObject);
+        return ResponseEntity.ok().build();
     }
 
 }
